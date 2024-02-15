@@ -29,7 +29,7 @@ namespace Application.Implementation
         public async Task<ResultOfAction<PagedListResult<BookserachResponse>>> SearchBookAsync(searchBookRequest request)
         {           
             var query = _unitOfWork.BookReposatory.Get(trackable: false);
-
+            query = await _unitOfWork.BookReposatory.Searchtitle(query,request.BookTitle);
             if (!string.IsNullOrEmpty(request.BookTitle))
                 query = query.Where(a => a.BookTitle.Contains(request.BookTitle));
             if (!string.IsNullOrEmpty(request.BookDescription))

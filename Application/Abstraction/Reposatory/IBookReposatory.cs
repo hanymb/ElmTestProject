@@ -10,6 +10,6 @@ namespace Application.Abstraction.Reposatory
 {
     public interface IBookReposatory :IRepository<Book>
     {
-        Task<IQueryable<Book>> Searchtitle(string title);
+        Task<IQueryable<Book>> Searchtitle(IQueryable<Book> query, string title);
     }
 }

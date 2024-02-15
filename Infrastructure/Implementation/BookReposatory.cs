@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Infrastructure.Implementation.Base;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +17,13 @@ namespace Infrastructure.Implementation
         {
         }
 
-        public async Task<IQueryable<Book>> Searchtitle(string title)
+        public async Task<IQueryable<Book>> Searchtitle(IQueryable<Book> query, string title)
         {
-          var query=_db.Books.Where(b=>EF.Functions.Like(b.BookInfo,$"%{title}%"));
+            query.Where(q => JsonConvert.DeserializeObject<BookInfoDto>(q.BookInfo).BookTitle .Contains(title));
             return query;
+          //var query=_db.Books.Where(b=>EF.Functions.Like(b.BookInfo,$"%{title}%"));
+           
+          //  return query;
         }
     }
 }
