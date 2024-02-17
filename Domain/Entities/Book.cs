@@ -35,7 +35,7 @@ namespace Domain.Entities
         public string BookTitle => JsonObject.RootElement.GetProperty("BookTitle").GetString();
         public string BookDescription => JsonObject.RootElement.GetProperty("BookDescription").GetString();
         public string Auther => JsonObject.RootElement.GetProperty("Author").GetString();
-        public DateTime PublishDate => JsonObject.RootElement.GetProperty("PublishDate").GetDateTime();
+        public DateTime PublishDate => JsonObject.RootElement.GetProperty("PublishDate").GetDateTime();     
         public string Cover => JsonObject.RootElement.GetProperty("CoverBase64").GetString();
     }
 

@@ -36,9 +36,18 @@ namespace Application.MappingProfile
             mapedDestination.PublishDate = mapedSource.PublishDate;
             mapedDestination.BookDescription = mapedSource.BookDescription;
             mapedDestination.BookTitle = mapedSource.BookTitle;
-            mapedDestination.CoverImage = mapedSource.Cover;
+            mapedDestination.CoverImage = GetCoverBase64String(mapedSource.Cover);
             mapedDestination.BookId = mapedSource.BookId;
             mapedDestination.LastModified = mapedSource.LastModified;
+
+            
+        }
+
+        private string GetCoverBase64String(string coverImage)
+        {
+            string x = "data:image/jpeg;base64,";
+            return coverImage.Remove(0, x.Length);
         }
     }
 }
+

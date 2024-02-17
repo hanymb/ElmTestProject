@@ -30,10 +30,8 @@ namespace Infrastructure.Implementation
              "AND (JSON_VALUE(BookInfo, '$.BookDescription') LIKE '%' + {2} + '%' OR {2} IS NULL) "+
              "AND (PARSE(JSON_VALUE(BookInfo, '$.PublishDate')as date) = {3} OR {3} IS NULL)  ",
              request.BookTitle,request.Auther,request.BookDescription,request.PublishDate);
-
             return query;
-          //var query=_db.Books.Where(b=>EF.Functions.Like(b.BookInfo,$"%{title}%"));
-           
+          //var query=_db.Books.Where(b=>EF.Functions.Like(b.BookInfo,$"%{title}%"));           
           //  return query;
         }
 
