@@ -17,6 +17,8 @@ namespace Application.Response
         public string Auther {  get; set; }
         public DateTime PublishDate { get; set; }
         public DateTime LastModified { get; set; }
+
+        public string CoverImage { get; set; }
       //  public string BookInfo { get; set; }
 
     }

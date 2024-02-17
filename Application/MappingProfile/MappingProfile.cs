@@ -36,6 +36,7 @@ namespace Application.MappingProfile
             mapedDestination.PublishDate = mapedSource.PublishDate;
             mapedDestination.BookDescription = mapedSource.BookDescription;
             mapedDestination.BookTitle = mapedSource.BookTitle;
+            mapedDestination.CoverImage = mapedSource.Cover;
             mapedDestination.BookId = mapedSource.BookId;
             mapedDestination.LastModified = mapedSource.LastModified;
         }

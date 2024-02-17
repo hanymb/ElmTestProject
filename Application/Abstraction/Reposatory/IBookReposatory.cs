@@ -1,5 +1,7 @@
 ﻿using Application.Abstraction.Reposatory.Base;
+using Application.Request;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,9 @@ namespace Application.Abstraction.Reposatory
 {
     public interface IBookReposatory :IRepository<Book>
     {
-        Task<IQueryable<Book>> Searchtitle(string title);
+
+        IQueryable<Book> Searchtitle(searchBookRequest request);
+
+
     }
 }

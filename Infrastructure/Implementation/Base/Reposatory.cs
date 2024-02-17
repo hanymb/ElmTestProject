@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction.Reposatory.Base;
 using Domain.Common;
+using Domain.Entities;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -23,10 +24,11 @@ namespace Infrastructure.Implementation.Base
             this._dbSet = this._db.Set<TEntity>();
         }
 
+
         public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, bool trackable = true, params Expression<Func<TEntity, object>>[] includeProperties)
         {
-            IQueryable<TEntity> query = _dbSet;       
-            
+            IQueryable<TEntity> query = _dbSet;
+
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -56,6 +58,7 @@ namespace Infrastructure.Implementation.Base
 
             return query;
         }
+
 
         public async Task<TEntity> GetByIdAsync(object id)
         {
@@ -262,6 +265,51 @@ namespace Infrastructure.Implementation.Base
             return (IOrderedQueryable<T>)source.Provider.CreateQuery<T>(call);
         }
 
-
     }
+
+
+    public class BookReposatory : IBookReposatory
+    {
+        private readonly BookDbContext _db;
+        private readonly DbSet<Book> _dbSet;
+        public BookReposatory(BookDbContext db)
+        {
+                _db = db;
+            _dbSet = this._db.Set<Book>();
+
+        }
+
+     
+
+        public IQueryable<Book> Getall(Expression<Func<Book, bool>> filter = null, Func<IQueryable<Book>, IOrderedQueryable<Book>> orderBy = null, bool trackable = true, params Expression<Func<Book, object>>[] includeProperties)
+        {
+            IQueryable<Book> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            return query;
+        }
+
+        public IQueryable<Book> SearcTitle(IQueryable<Book> query,string title)
+        {
+            return query.CustomFilter(title);
+        }
+    }
+    public static class QueryableExtensions
+    {
+       
+            public static IQueryable<Book> CustomFilter(this IQueryable<Book> query, string filterValue)
+            {
+                if (string.IsNullOrWhiteSpace(filterValue))
+                {
+                    return query;
+                }
+
+                return query.Where(book => book.Auther.Contains(filterValue));
+            }
+        
+    }
+
 }

@@ -1,5 +1,7 @@
 ﻿using Domain.Common;
+using Domain.Entities;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +27,12 @@ namespace Application.Abstraction.Reposatory.Base
         void Delete(TEntity entityToDelete);
         void DeleteByQueryAsync(Expression<Func<TEntity, bool>> filter = null);
         Task Delete(object id);
+  
+       
+    }
+    public interface IBookReposatory
+    {
+        IQueryable<Book> Getall(Expression<Func<Book, bool>> filter = null, Func<IQueryable<Book>, IOrderedQueryable<Book>> orderBy = null, bool trackable = true, params Expression<Func<Book, object>>[] includeProperties);
+         IQueryable<Book> SearcTitle(IQueryable<Book> query, string title);
     }
 }

@@ -36,6 +36,7 @@ namespace Domain.Entities
         public string BookDescription => JsonObject.RootElement.GetProperty("BookDescription").GetString();
         public string Auther => JsonObject.RootElement.GetProperty("Author").GetString();
         public DateTime PublishDate => JsonObject.RootElement.GetProperty("PublishDate").GetDateTime();
+        public string Cover => JsonObject.RootElement.GetProperty("CoverBase64").GetString();
     }
 
     public class BookInfoDto
@@ -44,6 +45,7 @@ namespace Domain.Entities
         public string BookDescription { get; set; }
         public string Auther { get; set; }
         public DateTime PublishDate { get; set; }
+        public string Cover { get; set; }
 
 
     }

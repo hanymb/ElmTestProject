@@ -37,7 +37,7 @@ namespace Infrastructure
             {
                 entity.ToTable("Book");
                 entity.HasKey(a => a.BookId);
-                entity.Property(r=>r.BookTitle)
+                //entity.Property(r=>r.BookTitle)
                
                 //entity.Property(r => r.BookInfoDto)
                 //.HasConversion(
