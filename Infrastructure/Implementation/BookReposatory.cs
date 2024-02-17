@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Infrastructure.Implementation.Base;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,9 @@ namespace Infrastructure.Implementation
              request.BookTitle,request.Auther,request.BookDescription,request.PublishDate);
 
             return query;
+          //var query=_db.Books.Where(b=>EF.Functions.Like(b.BookInfo,$"%{title}%"));
+           
+          //  return query;
         }
 
 

@@ -32,13 +32,25 @@ namespace Application.Implementation
         }
 
         public async Task<ResultOfAction<PagedListResult<BookserachResponse>>> SearchBookAsync(searchBookRequest request)
-        {
+        {           
+            var query = _unitOfWork.BookReposatory.Get(trackable: false);
 
-            var query = _unitOfWork.BookReposatory.Searchtitle(request);       
-            var pagedListinfo = new PagedListInfo(request.PageNumber, request.PageSize);
-            var paginated = _unitOfWork.BookReposatory.GetPagedAsync(pagedListinfo, query);
-            var queryCount = Task.FromResult(query.Count());
-            await Task.WhenAll(paginated, queryCount);
+            if (!string.IsNullOrEmpty(request.BookTitle))
+                query = query.Where(a => a.BookTitle.Contains(request.BookTitle));
+            if (!string.IsNullOrEmpty(request.BookDescription))
+                query = query.Where(a => a.BookTitle.Contains(request.BookDescription));
+            if (!string.IsNullOrEmpty(request.Auther))
+                query = query.Where(a => a.BookTitle.Contains(request.Auther));
+            if (request.PublishDate.HasValue)
+                query = query.Where(a => a.PublishDate == request.PublishDate);
+            try
+            {
+                var pagedListinfo = new PagedListInfo(request.PageNumber, request.PageSize);
+                var paginated = _unitOfWork.BookReposatory.GetPagedAsync(pagedListinfo, query);
+                var queryCount = Task.FromResult(query.Count());
+                await Task.WhenAll(paginated, queryCount);
+           
+            
             var result = new PagedListResult<BookserachResponse>()
             {
                 PageSize = request.PageSize,
